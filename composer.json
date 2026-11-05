@@ -48,9 +48,17 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
         ],
+        "lint": "pint",
+        "rector": "rector",
+        "test:lint": "pint --test",
+        "test:rector": "rector --dry-run",
+        "test:pest": "pest --parallel --compact",
         "test": [
             "@php artisan config:clear --ansi @no_additional_args",
-            "@php artisan test"
+            "@php artisan test",
+            "@test:lint",
+            "@test:rector",
+            "@test:pest"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
