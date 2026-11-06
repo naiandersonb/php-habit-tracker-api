@@ -22,6 +22,7 @@ Route::prefix('api')->name('api.')->group(function (): void {
         ->scoped(['habit' => 'uuid']);
 
     Route::get('/habits/{habit:uuid}/logs', [HabitLogController::class, 'index'])->name('habit.logs.index');
+    Route::post('/habits/{habit:uuid}/logs', [HabitLogController::class, 'store'])->name('habit.logs.store');
 
     // Route::apiResource('/habits/{habit:uuid}/logs', HabitLogController::class)->scoped(['habit' => 'uuid']);
 });
