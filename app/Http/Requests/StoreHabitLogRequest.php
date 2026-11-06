@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-class storeHabitLogRequest extends FormRequest
+class StoreHabitLogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,9 @@ class storeHabitLogRequest extends FormRequest
         ];
     }
 
-    protected function passedValidation(): void
-    {
-        $this->merge(['uuid' => Str::uuid()]);
-    }
+    // agora isso é feito no model
+    // protected function passedValidation(): void
+    // {
+    //     $this->merge(['uuid' => Str::uuid()]);
+    // }
 }

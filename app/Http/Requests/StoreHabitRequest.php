@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -28,13 +28,5 @@ class StoreHabitRequest extends FormRequest
         return [
             'title' => ['required', 'min:3', 'max:255', 'string'],
         ];
-    }
-
-    /**
-     * Handle a passed validation attempt.
-     */
-    protected function passedValidation(): void
-    {
-        $this->merge(['uuid' => Str::uuid()]);
     }
 }

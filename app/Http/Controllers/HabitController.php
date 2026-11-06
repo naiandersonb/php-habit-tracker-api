@@ -38,16 +38,14 @@ class HabitController extends Controller
     public function store(StoreHabitRequest $request)
     {
         $data = $request->only('title', 'uuid');
-        $habit = Habit::create(array_merge($data, ['user_id' => 1]));
+        $habit = Habit::create(array_merge($request->validated(), ['user_id' => 1]));
 
         return HabitResource::make($habit);
     }
 
     public function update(UpdateHabitRequest $request, Habit $habit)
     {
-        $data = $request->validated();
-        $habit->update($data);
-
+        $habit->update($request->validated());
         return HabitResource::make($habit);
     }
 
