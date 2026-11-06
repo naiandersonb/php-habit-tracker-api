@@ -32,7 +32,17 @@ class HabitController extends Controller
 
     public function show(Habit $habit)
     {
-        return HabitResource::make($habit);
+        request()->validate([
+            'with' => ['string', 'nullable', 'regex:/\b(?:logs|user)(?:.*\b(?:logs|user))?/i']
+        ]);
+
+        $load = request()->string('with')->explode(',')->filter(fn($w) => strlen($w) > 0)->toArray();
+
+        return HabitResource::make(
+
+            $habit->load($load)
+
+        );
     }
 
     public function store(StoreHabitRequest $request)
