@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use App\Http\Controllers\HabitController;
+use App\Http\Controllers\HabitLogController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn (): array => [config('app.name')]);
+Route::get('/', fn(): array => [config('app.name')]);
 
 Route::prefix('api')->name('api.')->group(function (): void {
     // Route::get('/habits', [HabitController::class, 'index'])->name('habits.index');
@@ -19,4 +20,8 @@ Route::prefix('api')->name('api.')->group(function (): void {
     // uma forma mais simplificada de organizar as rotas
     Route::apiResource('/habits', HabitController::class)
         ->scoped(['habit' => 'uuid']);
+
+    Route::get('/habits/{habit:uuid}/logs', [HabitLogController::class, 'index'])->name('habit.logs.index');
+
+    // Route::apiResource('/habits/{habit:uuid}/logs', HabitLogController::class)->scoped(['habit' => 'uuid']);
 });
