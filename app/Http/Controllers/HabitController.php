@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreHabitRequest;
@@ -7,15 +9,24 @@ use App\Http\Requests\UpdateHabitRequest;
 use App\Http\Resources\HabitResource;
 use App\Models\Habit;
 use App\Models\HabitLog;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class HabitController extends Controller
 {
-
     public function index()
     {
         return HabitResource::collection(
-            Habit::all()
+            Habit::query()
+                //   ->with(['user', 'logs'])
+                ->when(
+                    str(request()->string('with', ''))->contains('user'),
+                    fn(Builder $query) => $query->with(['user'])
+                )
+                ->when(
+                    str(request()->string('with', ''))->contains('logs'),
+                    fn($query) => $query->with(['logs'])
+                )
+                ->get()
         );
     }
 
@@ -44,6 +55,7 @@ class HabitController extends Controller
     {
         HabitLog::whereHabitId($habit->id)->delete();
         $habit->delete();
+
         return response()->noContent();
     }
 }

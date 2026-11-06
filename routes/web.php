@@ -1,13 +1,13 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use App\Http\Controllers\HabitController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn(): array => [config('app.name')]);
+Route::get('/', fn (): array => [config('app.name')]);
 
-Route::prefix('api')->name('api.')->group(function () {
+Route::prefix('api')->name('api.')->group(function (): void {
     // Route::get('/habits', [HabitController::class, 'index'])->name('habits.index');
     // Route::post('/habits', [HabitController::class, 'store'])->name('habits.store');
 

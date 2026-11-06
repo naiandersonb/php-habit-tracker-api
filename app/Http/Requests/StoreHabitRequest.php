@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -24,13 +26,12 @@ class StoreHabitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'min:3', 'max:255', 'string']
+            'title' => ['required', 'min:3', 'max:255', 'string'],
         ];
     }
 
     /**
      * Handle a passed validation attempt.
-     * @return void
      */
     protected function passedValidation(): void
     {
