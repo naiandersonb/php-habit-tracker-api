@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -24,7 +26,7 @@ class StoreHabitLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'completed_at' => ['required', 'date']
+            'completed_at' => ['required', 'date'],
         ];
     }
 

@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\HabitLogController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Routing\Loader\Configurator\Traits\RouteTrait;
 
-Route::get('/', fn(): array => [config('app.name')]);
+Route::get('/', fn (): array => [config('app.name')]);
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest')->group(function (): void {
+    Route::post('/api/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/api/register', [AuthController::class, 'register'])->name('auth.register');
 });
 

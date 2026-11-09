@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -15,18 +15,18 @@ class HabitLog extends Model
     /** @use HasFactory<HabitLogFactory> */
     use HasFactory;
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 
         // cria o UUID caso ele ainda não exista, elimina a função passedValidation
         // no store de criação de log
-        static::creating(function (self $log) {
+        static::creating(function (self $log): void {
             $log->uuid ??= Str::uuid();
         });
 
         // mantém a integridade do UUID, não permite que ele seja alterado a cada atualização
-        static::updating(function (self $log) {
+        static::updating(function (self $log): void {
             if ($log->isDirty('uuid')) {
                 $log->uuid = $log->getOriginal('uuid');
             }

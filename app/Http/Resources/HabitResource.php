@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Resources;
 
@@ -17,13 +17,13 @@ class HabitResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'uuid' => $this->uuid,
+            'uuid'  => $this->uuid,
             'title' => $this->title,
-            'user' => UserResource::make($this->whenLoaded('user')),
-            'logs' => HabitLogResource::collection($this->whenLoaded('logs')),
+            'user'  => UserResource::make($this->whenLoaded('user')),
+            'logs'  => HabitLogResource::collection($this->whenLoaded('logs')),
             'links' => [
                 'self' => route('api.habits.show', $this),
-                'logs' => route('api.habit.logs.index', $this)
+                'logs' => route('api.habit.logs.index', $this),
             ],
         ];
     }

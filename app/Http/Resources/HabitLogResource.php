@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -15,15 +17,15 @@ class HabitLogResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'uuid' => $this->uuid,
+            'uuid'         => $this->uuid,
             'completed_at' => $this->completed_at,
-            'links' => [
-                'self' => route('api.habits.logs.destroy', [
+            'links'        => [
+                'self' => route('habits.logs.show', [
                     'habit' => $this->habit->uuid,
-                    'log' => $this->uuid
+                    'log'   => $this->uuid,
                 ]),
-                'logs' => route('api.habits.logs.index', $this)
-            ]
+                'logs' => route('habits.logs.index', $this->habit),
+            ],
         ];
     }
 }
